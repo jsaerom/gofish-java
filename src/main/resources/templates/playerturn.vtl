@@ -1,0 +1,18 @@
+<h1>$player.getName()'s Turn</h1>
+<ul>
+#foreach($card in $hand)
+  <li>$card</li>
+#end
+</ul>
+
+<form class="form-group" action="/game" method="post">
+  <div class="form-control">
+    <label for="player">Enter a players name: </label>
+    <input type="text" name="player" id="player">
+  </div>
+  <div class="form-control">
+    <label for="card">Do you have any: </label>
+    <input type="text" name="card" id="card">
+  </div>
+<button type="submit" class="btn">Take Turn</button>
+</form>

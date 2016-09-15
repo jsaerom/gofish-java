@@ -9,22 +9,21 @@ public class Game{
 
   public Game(){
     mCurrentPlayer = 1;
+
   }
 
   public void createDeck(){
-     String[] suits = {"Spade","Clubs"};//{"Spades","Clubs","Diamonds","Hearts"};
-     String[] values = {"Ace","2","3","4","5","6","7"};//,"8","9","10","Jack","Queen","King"};
-     for(String suit : suits){
+     String[] values = {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+     for(int i = 0; i<4;i++){
        for(String value : values){
-         deck.add(value); //+ " of " + suit);
+         deck.add(value);
        }
      }
-
+     Collections.shuffle(deck);
   }
 
-  public void shuffle(){
-    Collections.sort(deck);
-  }
+  // public void shuffle(){
+  // }
 
   public void deal(){
     for(Player player : players){
@@ -32,10 +31,12 @@ public class Game{
         player.setHand(deck.get(0));
         deck.remove(0);
       }
+
     }
   }
 
   public boolean turn(String name, String card){
+
     int i = 0;
       while(i<players.size()){
         if(i==mCurrentPlayer){
@@ -44,19 +45,30 @@ public class Game{
         else if(players.get(i).getName().equals(name)){
           if(players.get(i).getHand().contains(card)){
             handOverCard(card, i);
+            checkForPairs();
             return true;
           }else{
             goFish();
             int lastIndex = players.get(mCurrentPlayer).getHand().size();
             if(players.get(mCurrentPlayer).getHand().get(lastIndex-1).equals(card)){
+              checkForPairs();
               return true;
             }else{
+              checkForPairs();
               return false;
             }
           }
         }
       } i++;
       return false;
+  }
+  public boolean gameOver(){
+    for(int i = 0; i<players.size();i++){
+      if(players.get(i).getHand().isEmpty()){
+        return true;
+      }
+    }
+    return false;
   }
 
   public void handOverCard(String card,int i){
@@ -94,6 +106,7 @@ public class Game{
         }
       }
     }
+    removePairs();
   }
 
   public void removePairs(){

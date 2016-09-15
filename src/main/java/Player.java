@@ -13,6 +13,10 @@ public class Player{
     mHand = new ArrayList<String>();
     mAmountOfPairs = 0;
   }
+  public Player(){
+    mHand = new ArrayList<String>();
+    mAmountOfPairs = 0;
+  }
 
   public String getName(){
     return mName;

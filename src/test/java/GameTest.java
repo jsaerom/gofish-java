@@ -135,4 +135,14 @@ public class GameTest{
     assertEquals(expectedOutput,gameTest.getPlayer(1).getHand());
   }
 
+  @Test
+  public void gameOver_TestsIfGameIsOver_true(){
+    Game testGame = new Game();
+    testGame.addPlayer("Andrew");
+    testGame.getPlayer(1).setHand("1");
+    testGame.getPlayer(1).setHand("1");
+    testGame.checkForPairs();
+    assertEquals(true,testGame.gameOver());
+  }
+
 }
